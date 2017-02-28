@@ -44,19 +44,18 @@ public class PlayerPrefs_Manager : MonoBehaviour
             return false;
         }
     }
-    public static void SetDifficulty(int difficulty)
+    public static void SetDifficulty(float difficulty)
     {
-        if (difficulty > 0 && difficulty < 3)
+        if (difficulty > 0 && difficulty <= 3)
         {
-            PlayerPrefs.SetInt(DIFFICULTY_KEY, difficulty);
+            PlayerPrefs.SetFloat(DIFFICULTY_KEY, difficulty);
         }
         else { Debug.LogError("tried to set too high a difficulty"); }
 
     }
 
-    public static int GetDifficulty()
+    public static float GetDifficulty()
     {
-        return PlayerPrefs.GetInt(DIFFICULTY_KEY);
+        return PlayerPrefs.GetFloat(DIFFICULTY_KEY);
     }
-
 }
