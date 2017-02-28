@@ -9,19 +9,33 @@ public class LevelManager : MonoBehaviour
     static string lastPlayedLevel;
 
     public static string[] playableLevels = { "Level_01", "Level_02", "Level_03", "Level_04" };
-
-    public static void LoadLevel(string name)
+    void Start()
     {
-        if (playableLevels.Contains(name))
+
+
+        SceneManager.sceneLoaded += this.OnLoadCallback;
+    }
+
+
+
+    void OnLoadCallback(Scene scene, LoadSceneMode sceneMode)
+    {
+        string levelname = scene.name;
+        if (playableLevels.Contains(levelname))
         {
 
-            lastPlayedLevel = name;
+
+            lastPlayedLevel = levelname;
 
         }
 
+
+    }
+    public static void LoadLevel(string name)
+    {
         Debug.Log("Loading level " + name);
 
-        SceneManager.LoadScene(name);
+        SceneManager.LoadSceneAsync(name);
     }
 
     public void LoadLevelWrapper(string name)
@@ -50,10 +64,7 @@ public class LevelManager : MonoBehaviour
     public static void LoadNextLevel()
     {
         int levelIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        print("Levelindex is " + levelIndex);
-        Scene levelName = SceneManager.GetSceneAt(levelIndex);
-        print("levelname is" + levelName.name);
-        //LoadLevel(levelName);
+        SceneManager.LoadSceneAsync(levelIndex);
     }
 
     public static void ReloadCurrent()

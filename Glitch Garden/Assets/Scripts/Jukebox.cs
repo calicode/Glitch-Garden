@@ -13,10 +13,19 @@ public class Jukebox : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
 
+
     }
 
 
+    public void SetVolume(float volume)
+    {
+        if (volume > 0f && volume < 1f)
+        {
+            audioSource.volume = volume;
+        }
+        else { Debug.LogError("Tried to set volume too high. Input is " + volume); }
 
+    }
 
     void OnLevelWasLoaded(int level)
     {
