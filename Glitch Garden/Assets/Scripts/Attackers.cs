@@ -22,10 +22,6 @@ public class Attackers : MonoBehaviour
     /// object (2D physics only).
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
-    }
 
     public void SetSpeed(float speed)
     {
@@ -33,9 +29,9 @@ public class Attackers : MonoBehaviour
     }
     // setup a method called below which will choose the right damage based on object name
     // i don't like digging through animation events to find damage numbers
+    // the individual attackers have a method now but that shortcuts the animation event
 
-
-    void StrikeCurrentTarget(float damage)
+    public void StrikeCurrentTarget(float damage)
     {
         /*		switch (name){
                     case 
