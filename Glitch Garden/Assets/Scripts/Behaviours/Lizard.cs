@@ -22,7 +22,7 @@ public class Lizard : MonoBehaviour
         }
         else
         {
-            anim.SetBool("isAttacking", true); attackers.StrikeCurrentTarget(damage);
+            anim.SetBool("isAttacking", true); attackers.SetCurrentTarget(other.gameObject);
 
         }
     }

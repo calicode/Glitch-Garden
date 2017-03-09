@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectiles : MonoBehaviour
 {
-
+    public float damage;
     // Use this for initialization
     void Start()
     {
@@ -21,6 +21,9 @@ public class Projectiles : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
+        Health healthComp = other.gameObject.GetComponent<Health>();
+        if (healthComp) { healthComp.TakeDamage(damage); }
+
     }
 
 }
