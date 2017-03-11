@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Projectiles : MonoBehaviour
 {
-    public float damage;
+    public float damage, speed;
+
     // Use this for initialization
     void Start()
     {
@@ -15,15 +16,19 @@ public class Projectiles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
 
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
-        Health healthComp = other.gameObject.GetComponent<Health>();
-        if (healthComp) { healthComp.TakeDamage(damage); }
-
+        if (other.gameObject.GetComponent<Attackers>())
+        {
+            Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
+            Health healthComp = other.gameObject.GetComponent<Health>();
+            if (healthComp) { healthComp.TakeDamage(damage); Debug.Log("Doing " + damage + " to " + other.gameObject.name); }
+            Destroy(gameObject);
+        }
     }
 
 }
