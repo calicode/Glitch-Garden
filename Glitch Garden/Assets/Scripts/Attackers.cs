@@ -4,7 +4,6 @@ using UnityEngine;
 public class Attackers : MonoBehaviour
 {
     float walkSpeed;
-    bool isAttacking = true;
     private GameObject currentTarget;
     Animator animator;
     // Use this for initialization
@@ -32,7 +31,6 @@ public class Attackers : MonoBehaviour
                     case 
                 }
         */
-        Debug.Log(name + " did " + damage + " damage");
         if (currentTarget)
         {
             currentTarget.GetComponent<Health>().TakeDamage(damage);

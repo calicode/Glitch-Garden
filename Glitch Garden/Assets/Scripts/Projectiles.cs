@@ -24,9 +24,8 @@ public class Projectiles : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Attackers>())
         {
-            Debug.Log(gameObject.name + " collided with " + other.gameObject.name);
             Health healthComp = other.gameObject.GetComponent<Health>();
-            if (healthComp) { healthComp.TakeDamage(damage); Debug.Log("Doing " + damage + " to " + other.gameObject.name); }
+            if (healthComp) { healthComp.TakeDamage(damage); }
             Destroy(gameObject);
         }
     }

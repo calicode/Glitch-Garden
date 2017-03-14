@@ -6,7 +6,6 @@ public class Fox : MonoBehaviour
 {
     Animator anim;
     Attackers attackers;
-    float damage = 5f;
     // Use this for initialization
     void Start()
     {

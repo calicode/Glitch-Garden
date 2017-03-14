@@ -6,14 +6,17 @@ public class Lizard : MonoBehaviour
 {
     Attackers attackers;
     Animator anim;
-    float damage = 5f;
+    //float damage = 5f;
     // Use this for initialization
     void Start()
     {
         attackers = GetComponent<Attackers>();
         anim = GetComponent<Animator>();
     }
-
+    void Update()
+    {
+        Debug.Log("Selected defender is" + Button.selectedDefender.name);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.GetComponent<Defenders>())
