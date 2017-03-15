@@ -7,9 +7,18 @@ public class Defenders : MonoBehaviour
     public GameObject projectile;
     public float attackspeed;
     Animator animator;
+    private GameObject defenderParent;
     // Use this for initialization
     void Start()
     {
+        defenderParent = GameObject.Find("Defenders");
+        if (!defenderParent)
+
+        {
+            defenderParent = new GameObject("Defenders");
+            gameObject.transform.parent = defenderParent.transform;
+
+        }
         animator = GetComponent<Animator>();
     }
 

@@ -6,14 +6,22 @@ public class Attackers : MonoBehaviour
     float walkSpeed;
     private GameObject currentTarget;
     Animator animator;
-    // Use this for initialization
+    private GameObject attackerParent;
+    // Use this for initializa
     void Start()
 
     {
         Rigidbody2D myRigidBody = gameObject.AddComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         myRigidBody.isKinematic = true;
+        attackerParent = GameObject.Find("Attackers");
+        if (!attackerParent)
 
+        {
+            attackerParent = new GameObject("Attackers");
+            gameObject.transform.parent = attackerParent.transform;
+
+        }
     }
 
 

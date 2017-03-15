@@ -5,12 +5,19 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
     public float damage, speed;
-
+    private GameObject projectileParent;
     // Use this for initialization
     void Start()
     {
         Rigidbody2D myRigidBody = gameObject.AddComponent<Rigidbody2D>();
         myRigidBody.isKinematic = true;
+        projectileParent = GameObject.Find("Projectiles");
+        if (!projectileParent)
+        {
+            projectileParent = new GameObject("Projectiles");
+        }
+        gameObject.transform.parent = projectileParent.transform;
+
     }
 
     // Update is called once per frame
