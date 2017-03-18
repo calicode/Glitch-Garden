@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Attackers : MonoBehaviour
 {
+    [TooltipAttribute("Average number of seconds between appearances")]
+    public float seenEverySeconds;
     float walkSpeed;
     private GameObject currentTarget;
     Animator animator;

@@ -15,7 +15,6 @@ public class Lizard : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log("Selected defender is" + Button.selectedDefender.name);
     }
     void OnTriggerEnter2D(Collider2D other)
     {
