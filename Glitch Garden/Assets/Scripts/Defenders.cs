@@ -8,24 +8,50 @@ public class Defenders : MonoBehaviour
     public float attackspeed;
     Animator animator;
     private GameObject defenderParent;
+    private Vector2 rayCastPositionStart;
     // Use this for initialization
+    int layerMask;
     void Start()
     {
+        layerMask = 1 << 8;
         defenderParent = GameObject.Find("Defenders");
         if (!defenderParent)
 
         {
             defenderParent = new GameObject("Defenders");
-            gameObject.transform.parent = defenderParent.transform;
+
 
         }
+        gameObject.transform.parent = defenderParent.transform;
+
         animator = GetComponent<Animator>();
     }
+    bool EnemyInLane()
+    {
 
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, Mathf.Infinity, layerMask);
+
+
+        if (hit)
+        {
+            Attackers rayAttacker = hit.collider.gameObject.GetComponent<Attackers>();
+
+            if (rayAttacker) { return true; } else { return false; }
+        }
+        return false;
+
+
+    }
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.tag == "defender_fightback")
+        {
+            animator.SetBool("isAttacking", EnemyInLane());
+        }
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {

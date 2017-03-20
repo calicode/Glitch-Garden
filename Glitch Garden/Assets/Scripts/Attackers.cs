@@ -21,9 +21,9 @@ public class Attackers : MonoBehaviour
 
         {
             attackerParent = new GameObject("Attackers");
-            gameObject.transform.parent = attackerParent.transform;
 
         }
+        gameObject.transform.parent = attackerParent.transform;
     }
 
 

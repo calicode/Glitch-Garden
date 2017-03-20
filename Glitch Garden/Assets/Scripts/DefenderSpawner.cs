@@ -28,7 +28,6 @@ public class DefenderSpawner : MonoBehaviour
         mousePositionRounded.x = Mathf.Round(mousePositionRounded.x);
         mousePositionRounded.y = Mathf.Round(mousePositionRounded.y);
         mousePositionRounded.z = -5f;
-        print("screen to world point is: " + mousePositionRounded);
         Instantiate(Button.selectedDefender, mousePositionRounded, Quaternion.identity);
     }
 }
