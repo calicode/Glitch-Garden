@@ -11,6 +11,7 @@ public class Defenders : MonoBehaviour
     private Vector2 rayCastPositionStart;
     // Use this for initialization
     int layerMask;
+    public int starCost = 1;
     void Start()
     {
         layerMask = 1 << 8;
@@ -79,6 +80,12 @@ public class Defenders : MonoBehaviour
             Vector3 projectileSpawn = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
             Instantiate(projectile, projectileSpawn, Quaternion.identity);
         }
+    }
+
+    public void AddStars()
+    {
+        ResourceManager.AddStar();
+
     }
 
 }

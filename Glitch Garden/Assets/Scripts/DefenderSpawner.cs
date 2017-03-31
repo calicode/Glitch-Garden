@@ -8,10 +8,6 @@ public class DefenderSpawner : MonoBehaviour
     // taken tile. right now this kind of works with colliders but you can still click in a few places that will allow double placement
     // i think having an array of defenders will be useful anyway.
     private Camera mainCam;
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
         mainCam = GameObject.FindObjectOfType<Camera>();
@@ -24,10 +20,23 @@ public class DefenderSpawner : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
-        Vector3 mousePositionRounded = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePositionRounded.x = Mathf.Round(mousePositionRounded.x);
-        mousePositionRounded.y = Mathf.Round(mousePositionRounded.y);
-        mousePositionRounded.z = -5f;
-        Instantiate(Button.selectedDefender, mousePositionRounded, Quaternion.identity);
+        PlaceDefender();
     }
+
+    void PlaceDefender()
+    {
+        int defCost = Button.selectedDefender.GetComponent<Defenders>().starCost;
+        if (ResourceManager.UseStars(defCost))
+        {
+            Vector3 mousePositionRounded = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            mousePositionRounded.x = Mathf.Round(mousePositionRounded.x);
+            mousePositionRounded.y = Mathf.Round(mousePositionRounded.y);
+            mousePositionRounded.z = -5f;
+            Instantiate(Button.selectedDefender, mousePositionRounded, Quaternion.identity);
+        }
+
+
+    }
+
+
 }
