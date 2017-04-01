@@ -14,16 +14,19 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+
+        if (health <= 0f) { print("Health is " + health.ToString() + "calling killme"); KillMe(); }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0) { KillMe(); }
         // Separate method so I can call this from animation events
     }
     public void KillMe()
     {
+
+        if (gameObject.tag == "pumpkitten") { print("pumpkitten dying"); ResourceManager.DeactiveLaneSpawner(transform.position.y); }
         Destroy(gameObject);
 
     }

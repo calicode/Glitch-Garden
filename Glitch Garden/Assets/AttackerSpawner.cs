@@ -6,7 +6,7 @@ public class AttackerSpawner : MonoBehaviour
 {
     private GameObject spawnerParent;
     public GameObject[] spawnArray;
-    int numSpawners;
+    static int numSpawners;
 
     // Use this for initialization
     int numAttackers;
@@ -29,8 +29,11 @@ public class AttackerSpawner : MonoBehaviour
         Attackers attacker = objectToCheck.GetComponent<Attackers>();
         float meanSpawnDelay = attacker.seenEverySeconds;
         float spawnsPerSecond = 1 / meanSpawnDelay;
+        int numSpawners = ResourceManager.GetNumSpawners() - 1;
         // threshold should be divided by num of attacker spawners or lanes
-        float threshold = spawnsPerSecond * Time.deltaTime / 5;
+
+        float threshold = (spawnsPerSecond * Time.deltaTime) / numSpawners;
+        //print("Spawn threshold is " + threshold + " With num spawners " + numSpawners);
         if (Random.value < threshold) { return true; } else { return false; }
 
     }
@@ -55,12 +58,10 @@ public class AttackerSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (numAttackers < 10)
+
+        foreach (GameObject myGameObject in spawnArray)
         {
-            foreach (GameObject myGameObject in spawnArray)
-            {
-                if (canSpawnCheck(myGameObject)) { Spawn(myGameObject); }
-            }
+            if (canSpawnCheck(myGameObject)) { Spawn(myGameObject); }
         }
 
 

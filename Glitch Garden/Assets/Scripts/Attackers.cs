@@ -50,6 +50,13 @@ public class Attackers : MonoBehaviour
     {
         currentTarget = target;
     }
+
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+
+        animator.SetBool("isAttacking", false);
+    }
     // Update is called once per frame
     void Update()
     {
