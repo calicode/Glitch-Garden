@@ -9,6 +9,8 @@ public class Attackers : MonoBehaviour
     private GameObject currentTarget;
     Animator animator;
     private GameObject attackerParent;
+    bool runAway = false;
+    Vector3 moveDirection;
     // Use this for initializa
     void Start()
 
@@ -24,12 +26,14 @@ public class Attackers : MonoBehaviour
 
         }
         gameObject.transform.parent = attackerParent.transform;
+
     }
 
 
     public void SetSpeed(float speed)
     {
         walkSpeed = speed;
+
     }
     // setup a method called below which will choose the right damage based on object name
     // i don't like digging through animation events to find damage numbers
@@ -50,7 +54,25 @@ public class Attackers : MonoBehaviour
     {
         currentTarget = target;
     }
+    public Vector3 GetMoveVector()
+    {
+        switch (runAway)
+        {
+            case false:
+                return (Vector3.left * walkSpeed * Time.deltaTime);
+            case true:
+                return (Vector3.right * walkSpeed * Time.deltaTime);
+        }
+        return Vector3.left;
 
+    }
+    public void RunAway()
+    {
+        runAway = true;
+        walkSpeed *= 2;
+
+
+    }
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -60,7 +82,7 @@ public class Attackers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * walkSpeed * Time.deltaTime);
+        transform.Translate(GetMoveVector());
         if (!currentTarget) { animator.SetBool("isAttacking", false); }
     }
 }

@@ -33,8 +33,10 @@ public class AttackerSpawner : MonoBehaviour
         // threshold should be divided by num of attacker spawners or lanes
 
         float threshold = (spawnsPerSecond * Time.deltaTime) / numSpawners;
+        float ranValue = Random.value;
         //print("Spawn threshold is " + threshold + " With num spawners " + numSpawners);
-        if (Random.value < threshold) { return true; } else { return false; }
+
+        return (ranValue < threshold);
 
     }
 

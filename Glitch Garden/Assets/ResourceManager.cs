@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    public static int starPower = 15;
+    static int starPower;
+    const int STARPOWERDEFAULT = 20;
     public static float fortLife;
     static private AttackerSpawner[] spawnersArray;
     // Use this for initialization
     void Start()
     {
+        starPower = STARPOWERDEFAULT;
         UpdateSpawnersArray();
     }
 
@@ -43,8 +45,6 @@ public class ResourceManager : MonoBehaviour
     static void UpdateSpawnersArray()
     {
         spawnersArray = GameObject.FindObjectsOfType<AttackerSpawner>();
-        print("Update spawn called length is" + spawnersArray.Length);
-        print("array to string" + spawnersArray.ToString());
 
     }
 
@@ -55,7 +55,7 @@ public class ResourceManager : MonoBehaviour
 
         if (kittens <= 0)
         {
-            LevelManager.LoadLevel("Game Over");
+            GameOver();
         }
         foreach (AttackerSpawner laneSpawner in spawnersArray)
         {
@@ -64,10 +64,8 @@ public class ResourceManager : MonoBehaviour
             {
                 if (laneSpawner.transform.position.y == ypos)
                 {
-                    Debug.Log("trying to disable spawner at" + ypos);
-                    Destroy(laneSpawner); // this might break the next line
+                    Destroy(laneSpawner);
 
-                    Debug.Log("Disabled spawner in ypos" + ypos);
                 }
             }
         }
@@ -75,6 +73,10 @@ public class ResourceManager : MonoBehaviour
     }
 
 
+    static void GameOver()
+    {
+        LevelManager.LoadLevel("Game Over");
+    }
 }
 
 

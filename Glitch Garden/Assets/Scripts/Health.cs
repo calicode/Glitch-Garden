@@ -5,28 +5,26 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float health = 100f;
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
-
-        if (health <= 0f) { print("Health is " + health.ToString() + "calling killme"); KillMe(); }
+        if (health <= 0) { KillMe(); }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Separate method so I can call this from animation events
-    }
     public void KillMe()
     {
 
-        if (gameObject.tag == "pumpkitten") { print("pumpkitten dying"); ResourceManager.DeactiveLaneSpawner(transform.position.y); }
+        if (gameObject.tag == "pumpkitten") { ResourceManager.DeactiveLaneSpawner(transform.position.y); }
+        Attackers atkComponent = GetComponent<Attackers>();
+        if (atkComponent)
+
+        {
+            Debug.Log("atacker component found on" + gameObject.ToString());
+            atkComponent.RunAway();
+            return;
+        }
+        else { Debug.Log("No attacker component found on" + gameObject.ToString()); }
         Destroy(gameObject);
 
     }
