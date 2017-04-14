@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Button : MonoBehaviour
 {
     public static GameObject selectedDefender;
@@ -9,17 +9,21 @@ public class Button : MonoBehaviour
     Color origColor;
     private Button[] buttArray;
     public GameObject defenderToSpawn;
+    Text defenderCostText;
     void Start()
     {
+        defenderCostText = GetComponent<Text>();
         spriteRender = GetComponent<SpriteRenderer>();
         origColor = spriteRender.color;
         spriteRender.color = Color.gray;
         buttArray = GameObject.FindObjectsOfType<Button>();
         selectedDefender = gameObject;
-    }   /// <summary>
-        /// OnMouseDown is called when the user has pressed the mouse button while
-        /// over the GUIElement or Collider.
-        /// </summary>
+
+
+        defenderCostText.text = defenderToSpawn.GetComponent<Defenders>().starCost.ToString();
+
+
+    }
     void OnMouseDown()
     {
         selectedDefender = defenderToSpawn;
@@ -31,7 +35,4 @@ public class Button : MonoBehaviour
 
     }
 
-    void OnMouseUp()
-    {
-    }
 }
