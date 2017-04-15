@@ -25,7 +25,7 @@ public class DefenderSpawner : MonoBehaviour
 
     void PlaceDefender()
     {
-        int defCost = Button.selectedDefender.GetComponent<Defenders>().starCost;
+        int defCost = EntityValuesManager.GetValues(Button.selectedDefender.name).starCost;
         if (ResourceManager.UseStars(defCost))
         {
             Vector3 mousePositionRounded = mainCam.ScreenToWorldPoint(Input.mousePosition);

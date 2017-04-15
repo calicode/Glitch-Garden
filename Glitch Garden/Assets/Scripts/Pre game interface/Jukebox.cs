@@ -10,12 +10,16 @@ public class Jukebox : MonoBehaviour
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
 
 
     }
+    void Start()
+    {
 
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefs_Manager.GetMasterVolume();
+    }
 
     public void SetVolume(float volume)
     {

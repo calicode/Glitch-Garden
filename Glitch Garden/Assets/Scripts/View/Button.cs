@@ -9,19 +9,25 @@ public class Button : MonoBehaviour
     Color origColor;
     private Button[] buttArray;
     public GameObject defenderToSpawn;
+
     Text defenderCostText;
+
+
     void Start()
     {
-        defenderCostText = GetComponent<Text>();
+        defenderCostText = GetComponentInChildren<Text>();
         spriteRender = GetComponent<SpriteRenderer>();
         origColor = spriteRender.color;
         spriteRender.color = Color.gray;
         buttArray = GameObject.FindObjectsOfType<Button>();
         selectedDefender = gameObject;
 
+        defenderCostText.text = EntityValuesManager.GetValues(defenderToSpawn.name).starCost.ToString();
 
-        defenderCostText.text = defenderToSpawn.GetComponent<Defenders>().starCost.ToString();
+    }
 
+    void Awake()
+    {
 
     }
     void OnMouseDown()
